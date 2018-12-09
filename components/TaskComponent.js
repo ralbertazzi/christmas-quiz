@@ -1,5 +1,5 @@
 import React from 'react';
-const { Location, Permissions } = Expo;
+const { Location } = Expo;
 
 export default class TaskComponent extends React.Component {
 
