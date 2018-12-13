@@ -44,8 +44,8 @@ export default class SimpleCard extends TaskComponent {
             title={this.props.title}
             image={this.props.image}>
             {this.renderText()}
-            {this.renderButton()}
             {this.props.children}
+            {this.renderButton()}
         </Card>
     )
 }
