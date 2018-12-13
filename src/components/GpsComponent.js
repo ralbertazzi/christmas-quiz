@@ -13,7 +13,7 @@ export default class GpsComponent extends TaskComponent {
     {
         super(props)
         this.targetLocation = props.location
-        this.state = {}
+        this.state = {showGpsError: false, location: null}
     }
 
     async getLocationAsync()
@@ -24,12 +24,27 @@ export default class GpsComponent extends TaskComponent {
     componentDidMount()
     {
         this.gpsInterval = setInterval(async () => {
-            let location = await this.getLocationAsync()
-            let distance = distanceBetweenGpsCoordinates(location.coords, this.targetLocation)
-            if (distance < DISTANCE_THRESHOLD)
-                this.done()
+
+            let location = null
+            try
+            {
+                location = await this.getLocationAsync()
+            }
+            catch (err) { console.log(err) }
+
+            if (location)
+            {
+                let distance = distanceBetweenGpsCoordinates(location.coords, this.targetLocation)
+                if (distance < DISTANCE_THRESHOLD)
+                    this.done()
+                else
+                    this.setState({ location: location, distance: distance, showGpsError: false })
+            }
             else
-                this.setState({ location: location, distance: distance })
+            {
+                this.setState({ showGpsError: true })
+            }
+
         }, 5000)
     }
 
@@ -51,12 +66,23 @@ export default class GpsComponent extends TaskComponent {
         return <Text>{distanceString}</Text>
     }
 
+    renderGpsErrorMessage()
+    {
+        if (this.state.showGpsError)
+            return (
+                <Text style={{color: 'red'}}>
+                    Couldn't update the location. Maybe you turned your GPS off?
+                </Text>
+            )
+    }
+
     render()
     {
         return (
         <SimpleCard {...this.props}>
-            <Text>{JSON.stringify(this.state.location)}</Text>
+            { __DEV__ && <Text>{JSON.stringify(this.state.location)}</Text>}
             {this.renderDistance()}
+            {this.renderGpsErrorMessage()}
         </SimpleCard>
         )
     }
