@@ -1,5 +1,3 @@
-let GPS_PIAZZA_NETTUNO = { latitude: 44.494280, longitude: 11.342671 }
-
 function degreesToRadians(degrees) {
     return degrees * Math.PI / 180;
 }
@@ -9,7 +7,7 @@ function degreesToRadians(degrees) {
  * @param {First pair of coordinates} coords1 
  * @param {Second pair of coordinates} coords2 
  */
-function distanceBetweenGpsCoordinates(coords1, coords2) {
+export function distanceBetweenGpsCoordinates(coords1, coords2) {
     
     let lat1 = coords1.latitude
     let lat2 = coords2.latitude
@@ -29,5 +27,3 @@ function distanceBetweenGpsCoordinates(coords1, coords2) {
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
     return earthRadiusKm * c;
 }
-
-export default {degreesToRadians, distanceBetweenGpsCoordinates}
