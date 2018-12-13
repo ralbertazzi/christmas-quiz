@@ -1,10 +1,14 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Button } from 'react-native'
 import { Header } from 'react-native-elements'
 import RequestPermissions from './components/RequestPermissions'
 import SimpleCard from './components/SimpleCard'
 import GpsComponent from './components/GpsComponent'
-import { retrieveData, storeData } from './Storage'
+import InputComponent from './components/InputComponent'
+import { retrieveData, storeData, clearData } from './Storage'
+
+let GPS_PIAZZA_NETTUNO = { latitude: 44.494280, longitude: 11.342671 }
+let GPS_CASA_LUCA = { latitude: 44.468682, longitude: 11.373693 }
 
 export default class App extends React.Component {
 
@@ -31,7 +35,15 @@ export default class App extends React.Component {
             {
                 tag: GpsComponent,
                 title: "My Gps component!",
-                text: "Find this location"
+                text: "Find this location",
+                showDistance: false,
+                location: GPS_CASA_LUCA
+            },
+            {
+                tag: InputComponent,
+                title: "The answer to all your problems",
+                text: "You found me!",
+                buttonText: "Check"
             }
         ]
 
@@ -80,6 +92,7 @@ export default class App extends React.Component {
                 <View>
                     <ComponentTag {...component} onDone={this.nextComponent.bind(this)}/>
                 </View>
+                <Button title="Clear Async Storage" onPress={clearData}/>
             </View>
         );
     }
