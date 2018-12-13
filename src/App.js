@@ -43,6 +43,7 @@ export default class App extends React.Component {
                 tag: InputComponent,
                 title: "The answer to all your problems",
                 text: "You found me!",
+                answer: "1234",
                 buttonText: "Check"
             }
         ]
@@ -92,7 +93,7 @@ export default class App extends React.Component {
                 <View>
                     <ComponentTag {...component} onDone={this.nextComponent.bind(this)}/>
                 </View>
-                <Button title="Clear Async Storage" onPress={clearData}/>
+                { __DEV__ && <Button title="Clear Async Storage" onPress={clearData}/> }
             </View>
         );
     }
