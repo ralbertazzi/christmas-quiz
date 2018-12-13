@@ -1,5 +1,4 @@
 import React from 'react';
-const { Location } = Expo;
 
 export default class TaskComponent extends React.Component {
 
@@ -8,11 +7,6 @@ export default class TaskComponent extends React.Component {
         super(props)
 
         this.doneCallback = props.onDone
-    }
-
-    async getLocationAsync()
-    {
-        return Location.getCurrentPositionAsync({enableHighAccuracy: true})
     }
 
     done()
