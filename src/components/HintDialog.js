@@ -8,13 +8,6 @@ export default class HintDialog extends React.Component {
     {
         super(props)
         this.state = { text: '' }
-        this.handleInputChange = this.handleInputChange.bind(this)
-    }
-
-    handleInputChange(event)
-    {
-        const value = event.target && event.target.value
-        this.setState({ text: value })
     }
 
     render()
@@ -25,7 +18,7 @@ export default class HintDialog extends React.Component {
                 <Dialog.Description>
                     Requested for help? Write the hint code that you received and go on :)
                 </Dialog.Description>
-                <Dialog.Input onChangeText={this.handleInputChange} value={this.state.text} style={styles.input}/>
+                <Dialog.Input onChangeText={text => this.setState({text})} value={this.state.text} style={styles.input}/>
                 <Dialog.Button label='Cancel' onPress={this.props.onCancel} />
                 <Dialog.Button label='Confirm' onPress={() => this.props.onConfirm(this.state.text)} />
             </Dialog.Container>
