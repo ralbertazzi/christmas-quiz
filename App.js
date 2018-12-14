@@ -1,3 +1,11 @@
+import React from 'react';
 import App from './src/App'
+import { Provider as PaperProvider } from 'react-native-paper';
 
-export default App
+export default function Main() {
+    return (
+      <PaperProvider>
+        <App />
+      </PaperProvider>
+    );
+}  

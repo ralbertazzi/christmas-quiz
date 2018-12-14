@@ -1,6 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import Dialog from 'react-native-dialog';
+import { Button, Paragraph, Dialog, Portal, TextInput } from 'react-native-paper';
 
 export default class HintDialog extends React.Component {
 
@@ -13,22 +12,24 @@ export default class HintDialog extends React.Component {
     render()
     {
         return (
-            <Dialog.Container visible={this.props.visible} onBackdropPress={this.props.onCancel}>
+            <Portal>
+                <Dialog
+                    visible={this.props.visible}
+                    onDismiss={this.props.onCancel}>
                 <Dialog.Title>Insert hint code</Dialog.Title>
-                <Dialog.Description>
-                    Requested for help? Write the hint code that you received and go on :)
-                </Dialog.Description>
-                <Dialog.Input onChangeText={text => this.setState({text})} value={this.state.text} style={styles.input}/>
-                <Dialog.Button label='Cancel' onPress={this.props.onCancel} />
-                <Dialog.Button label='Confirm' onPress={() => this.props.onConfirm(this.state.text)} />
-            </Dialog.Container>
+                <Dialog.Content>
+                    <Paragraph>Requested for help? Write the hint code that you received and go on :)</Paragraph>
+                    <TextInput 
+                        label='Hint code'
+                        value={this.state.text}
+                        onChangeText={text => this.setState({ text })} />
+                </Dialog.Content>
+                <Dialog.Actions>
+                    <Button onPress={this.props.onCancel}>Cancel</Button>
+                    <Button onPress={() => this.props.onConfirm(this.state.text)}>Insert</Button>
+                </Dialog.Actions>
+                </Dialog>
+            </Portal>
         )
     }
 }
-
-const styles = StyleSheet.create({
-    input: {
-        borderBottomColor: '#169689',
-        borderBottomWidth: 1,
-    }
-})
