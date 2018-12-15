@@ -5,7 +5,7 @@ import { Paragraph, Text } from 'react-native-paper'
 const { Location } = Expo
 import { distanceBetweenGpsCoordinates } from '../utils'
 
-let DISTANCE_THRESHOLD = 0.020  // 20 m
+let DEFAULT_DISTANCE_THRESHOLD = 20  // 20 m
 
 export default class GpsComponent extends TaskComponent {
 
@@ -35,7 +35,8 @@ export default class GpsComponent extends TaskComponent {
             if (location)
             {
                 let distance = distanceBetweenGpsCoordinates(location.coords, this.targetLocation)
-                if (distance < DISTANCE_THRESHOLD)
+                let distanceThreshold = this.props.thresh ? this.props.thresh : DEFAULT_DISTANCE_THRESHOLD
+                if (distance < distanceThreshold)
                     this.done()
                 else
                     this.setState({ location: location, distance: distance, showGpsError: false })
