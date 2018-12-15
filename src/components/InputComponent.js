@@ -1,7 +1,7 @@
 import React from 'react';
 import TaskComponent from './TaskComponent';
 import SimpleCard from './SimpleCard';
-import { Input, Icon } from 'react-native-elements';
+import { TextInput } from 'react-native-paper';
 
 export default class InputComponent extends TaskComponent {
 
@@ -32,18 +32,12 @@ export default class InputComponent extends TaskComponent {
     {
         return (
         <SimpleCard {...this.props} onDone={this.checkAnswer.bind(this)}>
-            <Input
-            placeholder='Answer'
-            errorMessage={this.state.errorMessage}
-            onChangeText={this.onChangeText.bind(this)}
-            value={this.state.answer}
-            leftIcon={
-                <Icon
-                name='send'
-                size={24}
-                color='gray'
-                />
-            }
+            <TextInput
+                label={this.state.errorMessage}
+                placeholder='Answer'
+                error={this.state.errorMessage}
+                onChangeText={this.onChangeText.bind(this)}
+                value={this.state.answer}
             />
         </SimpleCard>
         )

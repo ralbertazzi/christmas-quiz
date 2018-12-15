@@ -1,6 +1,6 @@
 import React from 'react';
 import TaskComponent from './TaskComponent';
-import { Text, View, Button } from 'react-native';
+import SimpleCard from './SimpleCard';
 const { Permissions } = Expo;
 
 export default class RequestPermissions extends TaskComponent {
@@ -20,9 +20,10 @@ export default class RequestPermissions extends TaskComponent {
 
     render = () =>
     (
-        <View>
-            <Text>First I need to get access to your GPS</Text>
-            <Button onPress={this.requestPermissions.bind(this)} title={"Require permissions"}></Button>
-        </View>
+        <SimpleCard {...this.props}
+            title='Require permissions'
+            text='First I need to get access to your GPS'
+            buttonText='Grant permissions'
+            onDone={this.requestPermissions.bind(this)}/>
     )
 }

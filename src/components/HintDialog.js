@@ -19,7 +19,8 @@ export default class HintDialog extends React.Component {
                 <Dialog.Title>Insert hint code</Dialog.Title>
                 <Dialog.Content>
                     <Paragraph>Requested for help? Write the hint code that you received and go on :)</Paragraph>
-                    <TextInput 
+                    <TextInput
+                        mode='outlined'
                         label='Hint code'
                         value={this.state.text}
                         onChangeText={text => this.setState({ text })} />

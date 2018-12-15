@@ -1,7 +1,7 @@
 import React from 'react';
 import TaskComponent from './TaskComponent';
 import SimpleCard from './SimpleCard';
-import { Text } from 'react-native'
+import { Paragraph, Text } from 'react-native-paper'
 const { Location } = Expo
 import { distanceBetweenGpsCoordinates } from '../utils'
 
@@ -80,7 +80,7 @@ export default class GpsComponent extends TaskComponent {
     {
         return (
         <SimpleCard {...this.props}>
-            { __DEV__ && <Text>{JSON.stringify(this.state.location)}</Text>}
+            { __DEV__ && <Paragraph>{JSON.stringify(this.state.location)}</Paragraph>}
             {this.renderDistance()}
             {this.renderGpsErrorMessage()}
         </SimpleCard>
