@@ -1,16 +1,10 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, ScrollView } from 'react-native'
 import { Appbar, Snackbar } from 'react-native-paper'
-import RequestPermissions from './components/RequestPermissions'
-import SimpleCard from './components/SimpleCard'
-import GpsComponent from './components/GpsComponent'
-import InputComponent from './components/InputComponent'
 import HintDialog from './components/HintDialog'
 import { retrieveData, storeData, clearData } from './Storage'
 import SantaTracker from './components/SantaTracker';
-
-let GPS_PIAZZA_NETTUNO = { latitude: 44.494280, longitude: 11.342671 }
-let GPS_CASA_LUCA = { latitude: 44.468682, longitude: 11.373693 }
+import levels from './Levels'
 
 export default class App extends React.Component {
 
@@ -18,39 +12,7 @@ export default class App extends React.Component {
     {
         super(props)
 
-        this.components = [
-            {
-                tag: RequestPermissions
-            },
-            {
-                tag: SimpleCard,
-                text: "Thanks for accepting the permissions",
-                buttonText: "Move on"
-            },
-            {
-                tag: SimpleCard,
-                title: "What a nice title!",
-                image: require("../assets/torri.jpg"),
-                text: "Thanks for moving on!",
-                buttonText: "Please, enough."
-            },
-            {
-                tag: GpsComponent,
-                title: "My Gps component!",
-                text: "Find the location of Ginza restaurant",
-                showDistance: false,
-                location: GPS_CASA_LUCA,
-                gpsHint: "pippo1",
-                endHint: "pippo"
-            },
-            {
-                tag: InputComponent,
-                title: "The answer to all your problems",
-                text: "You found me!",
-                answer: "1234",
-                buttonText: "Check"
-            }
-        ]
+        this.components = levels
 
         this.state = this.getInitialState()
         this.loadState()
@@ -95,7 +57,12 @@ export default class App extends React.Component {
     {
         if (this.state.currentComponent < this.components.length - 1)
         {
+            let endMessage = this.components[this.state.currentComponent].endMessage
+            if (endMessage)
+                this.showMessage(endMessage)
+                
             this.setState({currentComponent: this.state.currentComponent + 1}, this.storeState)
+            this.scroll.scrollTo({x: 0, y: 0, animated: false})
         }
     }
 
@@ -142,10 +109,12 @@ export default class App extends React.Component {
                 <Appbar.Header>
                     <Appbar.Content title="Christmas Quiz"/>
                     { __DEV__ && <Appbar.Action icon="delete-forever" onPress={() => this.clearState()} /> }
-                    <Appbar.Action icon="redeem" onPress={this.triggerHintDialog} />
+                    { component.endHint || component.gpsHint ? <Appbar.Action icon="redeem" onPress={this.triggerHintDialog} /> : null }
                 </Appbar.Header>
-                <SantaTracker style={styles.card} progress={ (this.state.currentComponent + 1) / this.components.length }/>
-                <ComponentTag {...component} style={styles.card} onDone={this.nextComponent.bind(this)}/>
+                <ScrollView ref={(c) => {this.scroll = c}}>
+                    <SantaTracker style={styles.card} progress={ (this.state.currentComponent + 1) / this.components.length }/>
+                    <ComponentTag {...component} style={styles.card} onDone={this.nextComponent.bind(this)}/>
+                </ScrollView>
                 <HintDialog
                     onConfirm = { hint => this.onHint(hint) }
                     onCancel= { this.triggerHintDialog }
