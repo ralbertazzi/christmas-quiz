@@ -1,7 +1,7 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
+import { Button, Card, Title, Paragraph } from 'react-native-paper';
 import TaskComponent from './TaskComponent';
-import { Text, Button } from 'react-native';
-import { Card } from 'react-native-elements'
 
 export default class SimpleCard extends TaskComponent {
 
@@ -12,40 +12,24 @@ export default class SimpleCard extends TaskComponent {
 
     onButtonPress = () => this.done()
 
-    renderText()
-    {
-        if (this.props.text)
-            return (    
-            <Text style={{marginBottom: 10}}>
-                {this.props.text}
-            </Text>
-        )
-
-        return null
-    }
-
-    renderButton()
-    {
-        if (this.props.buttonText)
-            return (
-            <Button
-                icon={{name: 'code'}}
-                backgroundColor='#03A9F4'
-                onPress={this.onButtonPress}
-                buttonStyle={{borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0}}
-                title={this.props.buttonText} />
-            )
-        return null
-    }
-
     render = () =>
     (
-        <Card
-            title={this.props.title}
-            image={this.props.image}>
-            {this.renderText()}
-            {this.props.children}
-            {this.renderButton()}
+        <Card style={styles.card}>
+            { this.props.image && <Card.Cover source={this.props.image}/> }
+            <Card.Content>
+                { this.props.title      && <Title>{this.props.title}</Title>}
+                { this.props.buttonText && <Paragraph>{this.props.text}</Paragraph> }
+                { this.props.children }
+            </Card.Content>
+            <Card.Actions>
+                { this.props.buttonText && <Button onPress={this.onButtonPress}>{this.props.buttonText}</Button> }
+            </Card.Actions>
         </Card>
     )
 }
+
+const styles = StyleSheet.create({
+    card: {
+      margin: 10,
+    }
+});
