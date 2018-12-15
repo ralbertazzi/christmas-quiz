@@ -21,9 +21,6 @@ export default class RequestPermissions extends TaskComponent {
     render = () =>
     (
         <SimpleCard {...this.props}
-            title='Require permissions'
-            text='First I need to get access to your GPS'
-            buttonText='Grant permissions'
             onDone={this.requestPermissions.bind(this)}/>
     )
 }
