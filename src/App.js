@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, View, Button } from 'react-native'
-import { Header } from 'react-native-elements'
+import { Appbar } from 'react-native-paper'
 import RequestPermissions from './components/RequestPermissions'
 import SimpleCard from './components/SimpleCard'
 import GpsComponent from './components/GpsComponent'
 import InputComponent from './components/InputComponent'
+import HintDialog from './components/HintDialog'
 import { retrieveData, storeData, clearData } from './Storage'
 
 let GPS_PIAZZA_NETTUNO = { latitude: 44.494280, longitude: 11.342671 }
@@ -35,9 +36,10 @@ export default class App extends React.Component {
             {
                 tag: GpsComponent,
                 title: "My Gps component!",
-                text: "Find this location",
-                showDistance: false,
-                location: GPS_CASA_LUCA
+                text: "Find the location of Ginza restaurant",
+                showDistance: true,
+                location: GPS_CASA_LUCA,
+                endHint: "pippo"
             },
             {
                 tag: InputComponent,
@@ -48,11 +50,15 @@ export default class App extends React.Component {
             }
         ]
 
+        // DEFAULT STATE
         this.state = {
-            currentComponent: 0
+            currentComponent: 0,
+            display: false
         }
 
         this.loadState()
+
+        this.triggerModal = this.triggerModal.bind(this)
     }
 
     async loadState()
@@ -79,6 +85,18 @@ export default class App extends React.Component {
         }
     }
 
+    triggerModal() {
+        this.setState({ display: !this.state.display })
+    }
+
+    onHint(hint)
+    {
+        this.triggerModal()
+        let component = this.components[this.state.currentComponent]
+        if (component.endHint == hint)
+            this.nextComponent()
+    }
+
     render() {
         let component = this.components[this.state.currentComponent]
         let ComponentTag = component.tag
@@ -87,13 +105,21 @@ export default class App extends React.Component {
 
         return (
             <View style={styles.container}>
-                <Header
-                centerComponent={{ text: 'ChristmasQuiz', style: { color: '#fff' } }}
-                />
                 <View>
                     <ComponentTag {...component} onDone={this.nextComponent.bind(this)}/>
                 </View>
                 { __DEV__ && <Button title="Clear Async Storage" onPress={clearData}/> }
+                { __DEV__ && <Button 
+                                onPress = { this.triggerModal }
+                                title = "Open Modal"
+                                color = "orange">
+                            </Button>
+                }
+                <HintDialog 
+                    onConfirm = { hint => this.onHint(hint) }
+                    onCancel= { this.triggerModal }
+                    visible = { this.state.display }
+                />
             </View>
         );
     }
