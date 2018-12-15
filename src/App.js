@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Button } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Appbar } from 'react-native-paper'
 import RequestPermissions from './components/RequestPermissions'
 import SimpleCard from './components/SimpleCard'
@@ -50,15 +50,24 @@ export default class App extends React.Component {
             }
         ]
 
-        // DEFAULT STATE
-        this.state = {
-            currentComponent: 0,
-            display: false
-        }
-
+        this.state = this.getInitialState()
         this.loadState()
 
         this.triggerModal = this.triggerModal.bind(this)
+    }
+
+    getInitialState()
+    {
+        return {
+            currentComponent: 0,
+            display: false
+        }
+    }
+
+    clearState()
+    {
+        clearData()
+        this.setState(this.getInitialState())
     }
 
     async loadState()
@@ -105,16 +114,14 @@ export default class App extends React.Component {
 
         return (
             <View style={styles.container}>
+                <Appbar.Header>
+                    <Appbar.Content title="Christmas Quiz"/>
+                    { __DEV__ && <Appbar.Action icon="delete-forever" onPress={() => this.clearState()} /> }
+                    <Appbar.Action icon="redeem" onPress={this.triggerModal} />
+                </Appbar.Header>
                 <View>
                     <ComponentTag {...component} onDone={this.nextComponent.bind(this)}/>
                 </View>
-                { __DEV__ && <Button title="Clear Async Storage" onPress={clearData}/> }
-                { __DEV__ && <Button 
-                                onPress = { this.triggerModal }
-                                title = "Open Modal"
-                                color = "orange">
-                            </Button>
-                }
                 <HintDialog 
                     onConfirm = { hint => this.onHint(hint) }
                     onCancel= { this.triggerModal }
