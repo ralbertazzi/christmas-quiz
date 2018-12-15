@@ -1,12 +1,24 @@
+import React from 'react'
 import RequestPermissions from './components/RequestPermissions'
 import SimpleCard from './components/SimpleCard'
 import GpsComponent from './components/GpsComponent'
 import InputComponent from './components/InputComponent'
 import FakeMode from './components/FakeMode'
+import { Text } from 'react-native-paper'
 
+let GPS_MARCONI = { latitude: 44.431174, longitude: 11.269839 }
+let GPS_SCEICCO_BIANCO = { latitude: 44.484043, longitude: 11.269085 }
 let GPS_PIAZZA_NETTUNO = { latitude: 44.494280, longitude: 11.342671 }
 let GPS_CASA_LUCA = { latitude: 44.468682, longitude: 11.373693 }
 
+
+const Bold = (props) => (
+    <Text style={{fontWeight: 'bold'}}>{props.children}</Text>
+)
+
+const Italic = (props) => (
+    <Text style={{fontStyle: 'italic'}}>{props.children}</Text>
+)
 
 levels = [
     {
@@ -54,16 +66,39 @@ levels = [
         buttonText:'Grant permissions'
     },
     {
-        tag: SimpleCard,
-        text: "Thanks for accepting the permissions",
-        buttonText: "Move on"
+        tag: GpsComponent,
+        text: "Sembra che Babbo Natale sia già stato avvistato in zona! Poco fa la sua slitta era parcheggiata a Pontecchio Marconi. " + 
+                "Dirigiti là e comincia a investigare",
+        image: require('../assets/marconi.jpg'),
+        location: GPS_MARCONI,
+        gpsHint: "marconi",
+        endHint: "cominciamobene"
     },
     {
-        tag: SimpleCard,
-        title: "What a nice title!",
-        image: require("../assets/torri2.jpg"),
-        text: "Thanks for moving on!",
-        buttonText: "Please, enough."
+        tag: InputComponent,
+        image: require('../assets/forziere.jpg'),
+        text: <Text>
+                Niente da fare, Santa Claus è già ripartito!
+                Ma a quanto pare ha lasciato un piccolo forziere con un lucchetto a <Bold>4 cifre</Bold> per te. 
+                Accanto ad esso, un foglio con scritto: 
+                <Italic>
+                    I miei indovinelli richiedono molto ingegno: ci vorrebbe un <Bold>Premio Nobel</Bold> per risolverli tutti!
+                </Italic>
+                </Text>,
+        buttonText: "Conferma",
+        answer: "1909",
+        hint: "Le 4 cifre rappresentano un anno",
+        endHint: "1909"
+    },
+    {
+        tag: GpsComponent,
+        title: "Uno strano oggetto e uno strano messaggio",
+        image: require("../assets/meridiana.jpg"),
+        location: GPS_SCEICCO_BIANCO,
+        text: "Apri il forziere, e dentro trovi l'immagine di uno strano oggetto acuminato che proietta la sua ombra per terra. " + 
+                "Assieme ad essa, un messaggio che dice di trovare l'insegna di colui che indossa una tunica bianca.",
+        gpsHint: "meridiana-casalecchio",
+        endHint: "sceicco-bianco"
     },
     {
         tag: GpsComponent,
