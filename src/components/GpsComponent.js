@@ -32,7 +32,7 @@ export default class GpsComponent extends TaskComponent {
             }
             catch (err) { console.log(err) }
 
-            if (location)
+            if (location && location.coords.accuracy < 100)
             {
                 let distance = distanceBetweenGpsCoordinates(location.coords, this.targetLocation)
                 let distanceThreshold = this.props.thresh ? this.props.thresh : DEFAULT_DISTANCE_THRESHOLD
