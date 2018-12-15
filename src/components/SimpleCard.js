@@ -11,18 +11,18 @@ export default class SimpleCard extends TaskComponent {
 
     onButtonPress = () => this.done()
 
-    render = () =>
+    render = () => 
     (
-        <Card style={this.props.style}>
-            { this.props.image && <Card.Cover source={this.props.image}/> }
-            <Card.Content>
-                { this.props.title      && <Title>{this.props.title}</Title>}
-                { this.props.buttonText && <Paragraph>{this.props.text}</Paragraph> }
-                { this.props.children }
-            </Card.Content>
-            <Card.Actions>
-                { this.props.buttonText && <Button onPress={this.onButtonPress}>{this.props.buttonText}</Button> }
-            </Card.Actions>
-        </Card>
-    )
+            <Card style={this.props.style}>
+                { this.props.image && <Card.Cover source={this.props.image}/> }
+                <Card.Content>
+                    { this.props.title      && <Title>{this.props.title}</Title>}
+                    { this.props.text       && <Paragraph>{this.props.text}</Paragraph> }
+                    { this.props.children }
+                </Card.Content>
+                <Card.Actions>
+                    { this.props.buttonText && <Button onPress={this.onButtonPress}>{this.props.buttonText}</Button> }
+                </Card.Actions>
+            </Card>
+        )
 }
