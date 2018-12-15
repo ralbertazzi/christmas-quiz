@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView } from 'react-native'
+import { StyleSheet, View, KeyboardAvoidingView, ScrollView  } from 'react-native'
 import { Appbar, Snackbar } from 'react-native-paper'
 import HintDialog from './components/HintDialog'
 import { retrieveData, storeData, clearData } from './Storage'
@@ -53,6 +53,15 @@ export default class App extends React.Component {
         await storeData('state', this.state)
     }
 
+    previousComponent()
+    {
+        if (__DEV__ && this.state.currentComponent > 1)
+        {                
+            this.setState({currentComponent: this.state.currentComponent - 1}, this.storeState)
+            this.scrollToTop()
+        }
+    }
+
     nextComponent()
     {
         if (this.state.currentComponent < this.components.length - 1)
@@ -62,8 +71,13 @@ export default class App extends React.Component {
                 this.showMessage(endMessage)
                 
             this.setState({currentComponent: this.state.currentComponent + 1}, this.storeState)
-            this.scroll.scrollTo({x: 0, y: 0, animated: false})
+            this.scrollToTop()
         }
+    }
+
+    scrollToTop()
+    {
+        this.scroll.scrollTo({x: 0, y: 0, animated: false})
     }
 
     triggerHintDialog() {
@@ -108,18 +122,26 @@ export default class App extends React.Component {
             <View style={styles.container}>
                 <Appbar.Header>
                     <Appbar.Content title="Christmas Quiz"/>
+                    { __DEV__ && <Appbar.Action icon="rotate-left" onPress={() => this.previousComponent()} /> }
                     { __DEV__ && <Appbar.Action icon="delete-forever" onPress={() => this.clearState()} /> }
                     { component.endHint || component.gpsHint ? <Appbar.Action icon="redeem" onPress={this.triggerHintDialog} /> : null }
                 </Appbar.Header>
-                <ScrollView ref={(c) => {this.scroll = c}}>
-                    <SantaTracker style={styles.card} progress={ (this.state.currentComponent + 1) / this.components.length }/>
-                    <ComponentTag {...component} style={styles.card} onDone={this.nextComponent.bind(this)}/>
-                </ScrollView>
-                <HintDialog
-                    onConfirm = { hint => this.onHint(hint) }
-                    onCancel= { this.triggerHintDialog }
-                    visible = { this.state.displayHintDialog }
-                />
+                
+                <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
+                    <ScrollView ref={(c) => {this.scroll = c}}>
+
+                        <SantaTracker style={styles.card} progress={ (this.state.currentComponent + 1) / this.components.length }/>
+                        <ComponentTag {...component} style={styles.card} onDone={this.nextComponent.bind(this)}/>
+
+                    </ScrollView>
+
+                    <HintDialog
+                        onConfirm = { hint => this.onHint(hint) }
+                        onCancel= { this.triggerHintDialog }
+                        visible = { this.state.displayHintDialog }
+                    />
+
+                </KeyboardAvoidingView>
                 <Snackbar
                     visible={this.state.displaySnackbar}
                     onDismiss={this.hideMessage}
