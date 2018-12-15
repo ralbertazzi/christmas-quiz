@@ -1,12 +1,13 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native'
-import { Appbar } from 'react-native-paper'
+import { Appbar, Snackbar } from 'react-native-paper'
 import RequestPermissions from './components/RequestPermissions'
 import SimpleCard from './components/SimpleCard'
 import GpsComponent from './components/GpsComponent'
 import InputComponent from './components/InputComponent'
 import HintDialog from './components/HintDialog'
 import { retrieveData, storeData, clearData } from './Storage'
+import SantaTracker from './components/SantaTracker';
 
 let GPS_PIAZZA_NETTUNO = { latitude: 44.494280, longitude: 11.342671 }
 let GPS_CASA_LUCA = { latitude: 44.468682, longitude: 11.373693 }
@@ -37,8 +38,9 @@ export default class App extends React.Component {
                 tag: GpsComponent,
                 title: "My Gps component!",
                 text: "Find the location of Ginza restaurant",
-                showDistance: true,
+                showDistance: false,
                 location: GPS_CASA_LUCA,
+                gpsHint: "pippo1",
                 endHint: "pippo"
             },
             {
@@ -53,14 +55,17 @@ export default class App extends React.Component {
         this.state = this.getInitialState()
         this.loadState()
 
-        this.triggerModal = this.triggerModal.bind(this)
+        this.triggerHintDialog = this.triggerHintDialog.bind(this)
+        this.hideMessage = this.hideMessage.bind(this)
     }
 
     getInitialState()
     {
         return {
             currentComponent: 0,
-            display: false
+            displayHintDialog: false,
+            displaySnackbar: false,
+            snackbarMessage: ''
         }
     }
 
@@ -94,16 +99,36 @@ export default class App extends React.Component {
         }
     }
 
-    triggerModal() {
-        this.setState({ display: !this.state.display })
+    triggerHintDialog() {
+        this.setState({ displayHintDialog: !this.state.displayHintDialog })
     }
 
     onHint(hint)
     {
-        this.triggerModal()
+        this.triggerHintDialog()
         let component = this.components[this.state.currentComponent]
         if (component.endHint == hint)
+        {
             this.nextComponent()
+        }
+        else if (component.gpsHint == hint)
+        {
+            this.components[this.state.currentComponent].showDistance = true
+        }
+        else this.showMessage('Invalid hint code')
+    }
+
+    showMessage(message)
+    {
+        this.setState({
+            displaySnackbar: true,
+            snackbarMessage: message
+        })
+    }
+
+    hideMessage()
+    {
+        this.setState({ displaySnackbar: false })
     }
 
     render() {
@@ -117,16 +142,23 @@ export default class App extends React.Component {
                 <Appbar.Header>
                     <Appbar.Content title="Christmas Quiz"/>
                     { __DEV__ && <Appbar.Action icon="delete-forever" onPress={() => this.clearState()} /> }
-                    <Appbar.Action icon="redeem" onPress={this.triggerModal} />
+                    <Appbar.Action icon="redeem" onPress={this.triggerHintDialog} />
                 </Appbar.Header>
-                <View>
-                    <ComponentTag {...component} onDone={this.nextComponent.bind(this)}/>
-                </View>
-                <HintDialog 
+                <SantaTracker style={styles.card} progress={ (this.state.currentComponent + 1) / this.components.length }/>
+                <ComponentTag {...component} style={styles.card} onDone={this.nextComponent.bind(this)}/>
+                <HintDialog
                     onConfirm = { hint => this.onHint(hint) }
-                    onCancel= { this.triggerModal }
-                    visible = { this.state.display }
+                    onCancel= { this.triggerHintDialog }
+                    visible = { this.state.displayHintDialog }
                 />
+                <Snackbar
+                    visible={this.state.displaySnackbar}
+                    onDismiss={this.hideMessage}
+                    duration={Snackbar.DURATION_MEDIUM}
+                    action={{ label: 'Got It', onPress: this.hideMessage }}
+                    >
+                    { this.state.snackbarMessage }
+                </Snackbar>
             </View>
         );
     }
@@ -136,5 +168,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff'
+    },
+    card: {
+        margin: 10,
     }
 });

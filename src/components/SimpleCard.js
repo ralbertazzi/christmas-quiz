@@ -1,5 +1,4 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { Button, Card, Title, Paragraph } from 'react-native-paper';
 import TaskComponent from './TaskComponent';
 
@@ -14,7 +13,7 @@ export default class SimpleCard extends TaskComponent {
 
     render = () =>
     (
-        <Card style={styles.card}>
+        <Card style={this.props.style}>
             { this.props.image && <Card.Cover source={this.props.image}/> }
             <Card.Content>
                 { this.props.title      && <Title>{this.props.title}</Title>}
@@ -27,9 +26,3 @@ export default class SimpleCard extends TaskComponent {
         </Card>
     )
 }
-
-const styles = StyleSheet.create({
-    card: {
-      margin: 10,
-    }
-});
