@@ -32,7 +32,9 @@ export default class InputComponent extends TaskComponent {
     {
         return (
         <SimpleCard {...this.props} onDone={this.checkAnswer.bind(this)}>
+            { this.props.children }
             <TextInput
+                style={{ margin: 10 }}
                 label={this.state.errorMessage}
                 placeholder='Answer'
                 error={this.state.errorMessage}
