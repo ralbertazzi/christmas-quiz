@@ -19,6 +19,8 @@ export default class App extends React.Component {
 
         this.triggerHintDialog = this.triggerHintDialog.bind(this)
         this.hideMessage = this.hideMessage.bind(this)
+        this.previousComponent = this.previousComponent.bind(this)
+        this.nextComponent = this.nextComponent.bind(this)
     }
 
     getInitialState()
@@ -122,7 +124,8 @@ export default class App extends React.Component {
             <View style={styles.container}>
                 <Appbar.Header>
                     <Appbar.Content title="Christmas Quiz"/>
-                    { __DEV__ && <Appbar.Action icon="rotate-left" onPress={() => this.previousComponent()} /> }
+                    { __DEV__ && <Appbar.Action icon="rotate-left" onPress={this.previousComponent} /> }
+                    { __DEV__ && <Appbar.Action icon="rotate-right" onPress={this.nextComponent} /> }
                     { __DEV__ && <Appbar.Action icon="delete-forever" onPress={() => this.clearState()} /> }
                     { component.endHint || component.gpsHint ? <Appbar.Action icon="redeem" onPress={this.triggerHintDialog} /> : null }
                 </Appbar.Header>
@@ -131,7 +134,7 @@ export default class App extends React.Component {
                     <ScrollView ref={(c) => {this.scroll = c}}>
 
                         <SantaTracker style={styles.card} progress={ (this.state.currentComponent + 1) / this.components.length }/>
-                        <ComponentTag {...component} style={styles.card} onDone={this.nextComponent.bind(this)}/>
+                        <ComponentTag {...component} style={styles.card} onDone={this.nextComponent}/>
 
                     </ScrollView>
 
