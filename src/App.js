@@ -57,7 +57,7 @@ export default class App extends React.Component {
 
     previousComponent()
     {
-        if (__DEV__ && this.state.currentComponent > 1)
+        if (__DEV__ && this.state.currentComponent > 0)
         {                
             this.setState({currentComponent: this.state.currentComponent - 1}, this.storeState)
             this.scrollToTop()
