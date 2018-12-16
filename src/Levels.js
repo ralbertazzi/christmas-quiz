@@ -4,9 +4,11 @@ import SimpleCard from './components/SimpleCard'
 import GpsComponent from './components/GpsComponent'
 import InputComponent from './components/InputComponent'
 import FakeMode from './components/FakeMode'
-import { Text } from 'react-native-paper'
+import { Text, Button } from 'react-native-paper'
+const { Speech } = Expo
 
 let GPS_MARCONI = { latitude: 44.431174, longitude: 11.269839 }
+let GPS_ALTOPIANO = { latitude: 44.436754, longitude: 11.264497 }
 let GPS_SCEICCO_BIANCO = { latitude: 44.484043, longitude: 11.269085 }
 let GPS_PIAZZA_NETTUNO = { latitude: 44.494280, longitude: 11.342671 }
 let GPS_CASA_LUCA = { latitude: 44.468682, longitude: 11.373693 }
@@ -18,6 +20,10 @@ const Bold = (props) => (
 
 const Italic = (props) => (
     <Text style={{fontStyle: 'italic'}}>{props.children}</Text>
+)
+
+const NewLine = () => (
+    <Text>{ "\n" }</Text>
 )
 
 levels = [
@@ -67,6 +73,7 @@ levels = [
     },
     {
         tag: GpsComponent,
+        title: "Comincia l'avventura",
         text: "Sembra che Babbo Natale sia già stato avvistato in zona! Poco fa la sua slitta era parcheggiata a Pontecchio Marconi. " + 
                 "Dirigiti là e comincia a investigare",
         image: require('../assets/marconi.jpg'),
@@ -76,11 +83,12 @@ levels = [
     },
     {
         tag: InputComponent,
+        title: "Un indovinello da Premio Nobel",
         image: require('../assets/forziere.jpg'),
         text: <Text>
                 Niente da fare, Santa Claus è già ripartito!
                 Ma a quanto pare ha lasciato un piccolo forziere con un lucchetto a <Bold>4 cifre</Bold> per te. 
-                Accanto ad esso, un foglio con scritto: 
+                Accanto ad esso, un foglio con scritto:<NewLine/>
                 <Italic>
                     I miei indovinelli richiedono molto ingegno: ci vorrebbe un <Bold>Premio Nobel</Bold> per risolverli tutti!
                 </Italic>
@@ -89,6 +97,43 @@ levels = [
         answer: "1909",
         hint: "Le 4 cifre rappresentano un anno",
         endHint: "1909"
+    },
+    {
+        tag: GpsComponent,
+        title: "Entrata nel labirinto",
+        image: require('../assets/mappa-tesoro.jpg'),
+        text: <Text>Apri il forziere e dentro trovi... un nuovo indovinello! Esso recita:<NewLine/>
+                <Italic>
+                    E' l'opposto del bassoforte. Entra nel labirinto e trova il 55/9.
+                </Italic>
+            </Text>,
+        location: GPS_ALTOPIANO,
+        gpsHint: "altopiano",
+        endHint: "cercameglio"
+    },
+    {
+        tag: InputComponent,
+        title: "Un'apparizione dal naso rosso",
+        image: require('../assets/reindeer.jpg'),
+        text: <Text>Nel momento in cui raggiungi il posto designato una renna scende dal cielo e deposita
+                    un pacco davanti a te. Chi se lo sarebbe aspettato che questo pacco regalo però fosse protetto
+                    da un indistruttibile lucchetto a BEN due cifre?
+                    (bisognerebbe spiegare a Babbo Natale gli algoritmi di forza bruta ..)<NewLine/>
+                    La renna a questo punto comincia a parlare (niente di strano fin qui) e dopo aver lasciato il suo
+                    enigmatico messaggio sfreccia via tra le nuvole lasciando una scia di stelle dorate.
+            </Text>,
+        children: [
+            <Button key={0}
+                    style={{ margin: 10 }}
+                    onPress={() => Speech.speak("Cara Giulia, so che Babbo Natale é stato un po' antipatico con te quest'anno. " +
+                            "Io però sono una renna buona e voglio aiutarti. Non posso darti la combinazione, altrimenti Babbo Natale mi frusterà, " +
+                            "ma posso dirti che si aprirà con il numero civico più alto di questo meraviglioso Altopiano. In bocca al lupo!", { language: 'it' })}>
+                ASCOLTA LA RENNA
+            </Button>
+        ],
+        buttonText: "Inserisci la combinazione",
+        answer: "92",
+        endHint: "92"
     },
     {
         tag: GpsComponent,
