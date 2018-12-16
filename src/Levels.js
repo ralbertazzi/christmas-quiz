@@ -10,6 +10,7 @@ const { Speech } = Expo
 let GPS_MARCONI = { latitude: 44.431174, longitude: 11.269839 }
 let GPS_ALTOPIANO = { latitude: 44.436754, longitude: 11.264497 }
 let GPS_SCEICCO_BIANCO = { latitude: 44.484043, longitude: 11.269085 }
+let GPS_PIAZZA_MAGGIORE = { latitude: 44.493732, longitude: 11.343135 }
 let GPS_PIAZZA_NETTUNO = { latitude: 44.494280, longitude: 11.342671 }
 let GPS_CASA_LUCA = { latitude: 44.468682, longitude: 11.373693 }
 
@@ -137,7 +138,7 @@ levels = [
         ],
         buttonText: "Inserisci la combinazione",
         answer: "92",
-        endHint: "92"
+        endHint: "novantadue"
     },
     {
         tag: GpsComponent,
@@ -151,19 +152,18 @@ levels = [
     },
     {
         tag: GpsComponent,
-        title: "My Gps component!",
-        text: "Find the location of Ginza restaurant",
-        showDistance: false,
-        location: GPS_CASA_LUCA,
-        gpsHint: "pippo1",
-        endHint: "pippo"
+        image: require("../assets/inferno-dante.jpg"),
+        text: <Text>
+                <Italic>Vai dove inizia l'arduo percorso che porta alla casa del Padre della nostra volgar lingua</Italic>
+            </Text>,
+        location: GPS_PIAZZA_MAGGIORE,
+        gpsHint: "via-degli-dei",
+        endHint: "piazza-maggiore"
     },
     {
-        tag: InputComponent,
-        title: "The answer to all your problems",
-        text: "You found me!",
-        answer: "1234",
-        buttonText: "Check"
+        tag: SimpleCard,
+        title: "The End",
+        text: "Complimenti!",
     }
 ]
 
