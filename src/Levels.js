@@ -4,12 +4,13 @@ import SimpleCard from './components/SimpleCard'
 import GpsComponent from './components/GpsComponent'
 import InputComponent from './components/InputComponent'
 import FakeMode from './components/FakeMode'
-import { Text, Button } from 'react-native-paper'
-const { Speech } = Expo
+import ListenButton from './components/ListenButton'
+import { Text } from 'react-native-paper'
 
 let GPS_MARCONI = { latitude: 44.431174, longitude: 11.269839 }
 let GPS_ALTOPIANO = { latitude: 44.436754, longitude: 11.264497 }
 let GPS_SCEICCO_BIANCO = { latitude: 44.484043, longitude: 11.269085 }
+let GPS_PARCHETTO = { latitude: 44.482089, longitude: 11.264395 }
 let GPS_PIAZZA_MAGGIORE = { latitude: 44.493732, longitude: 11.343135 }
 let GPS_PIAZZA_NETTUNO = { latitude: 44.494280, longitude: 11.342671 }
 let GPS_CASA_LUCA = { latitude: 44.468682, longitude: 11.373693 }
@@ -106,7 +107,7 @@ levels = [
     {
         tag: GpsComponent,
         title: "Entrata nel labirinto",
-        image: require('../assets/mappa-tesoro.jpg'),
+        image: require('../assets/labirinto.jpg'),
         text: <Text>Apri il forziere e dentro trovi... un nuovo indovinello! Esso recita:<NewLine/>
                 <Italic>
                     E' l'opposto del bassoforte. Entra nel labirinto e trova il 55/9.
@@ -128,13 +129,12 @@ levels = [
                     enigmatico messaggio sfreccia via tra le nuvole lasciando una scia di stelle dorate.
             </Text>,
         children: [
-            <Button key={0}
-                    style={{ margin: 10 }}
-                    onPress={() => Speech.speak("Cara Giulia, so che Babbo Natale é stato un po' antipatico con te quest'anno. " +
-                            "Io però sono una renna buona e voglio aiutarti. Non posso darti la combinazione, altrimenti Babbo Natale mi frusterà, " +
-                            "ma posso dirti che si aprirà con il numero civico più alto di questo meraviglioso Altopiano. In bocca al lupo!", { language: 'it' })}>
-                ASCOLTA LA RENNA
-            </Button>
+            <ListenButton key={0}
+                buttonText="ASCOLTA LA RENNA"
+                speech={"Cara Giulia, so che Babbo Natale é stato un po' antipatico con te quest'anno. " +
+                        "Io però sono una renna buona e voglio aiutarti. Non posso darti la combinazione, altrimenti Babbo Natale mi frusterà, " +
+                        "ma posso dirti che si aprirà con il numero civico più alto di questo meraviglioso Altopiano. In bocca al lupo!"}>
+            </ListenButton>
         ],
         buttonText: "Inserisci la combinazione",
         answer: "92",
@@ -145,20 +145,82 @@ levels = [
         title: "Uno strano oggetto e uno strano messaggio",
         image: require("../assets/meridiana.jpg"),
         location: GPS_SCEICCO_BIANCO,
-        text: "Apri il forziere, e dentro trovi l'immagine di uno strano oggetto acuminato che proietta la sua ombra per terra. " + 
-                "Assieme ad essa, un messaggio che dice di trovare l'insegna di colui che indossa una tunica bianca.",
+        text: <Text>Apri il pacco, e dentro trovi l'immagine di uno strano oggetto acuminato che proietta la sua ombra per terra. 
+                Assieme ad essa, un messaggio che dice di trovare l'insegna del trafficante di petrolio.
+            </Text>,
         gpsHint: "meridiana-casalecchio",
         endHint: "sceicco-bianco"
     },
     {
         tag: GpsComponent,
+        title: "Caccia al tesoro",
+        image: require("../assets/mappa-tesoro.jpg"),
+        text: <Text>Finalmente arrivi in questa terra piena di gioia e spirito natalizio. Ah, se solo tu potessi godere della
+                    stessa gioia del Natale senza tutta questa fatica! Invece ti è toccato questo simpatico fidanz... Babbo Natale!<NewLine/>
+                    Il vecchio barbuto aveva piazzato il prossimo indizio sotto a un caipiroska!
+                    Esso recita:<NewLine/>
+                    <Italic>Ho inserito il prossimo indizio qui vicino, nei pressi del regno dei gloriosi rettili.
+                            Prendi la pala e preparati a scavare! Muahah!</Italic><NewLine/>
+                    (Indizio: la pala è figurata)
+            </Text>,
+        location: GPS_PARCHETTO,
+        gpsHint: "tartarughe",
+        endHint: "parco-giochi"
+    },
+    {
+        tag: GpsComponent,
         image: require("../assets/inferno-dante.jpg"),
         text: <Text>
-                <Italic>Vai dove inizia l'arduo percorso che porta alla casa del Padre della nostra volgar lingua</Italic>
+                Senza dubbio il vecchiaccio si è impegnato, ma la tua tenacia sembra essere all'altezza!
+                Dall'enigmaticità dell'indizio trovato pare però che le cose cominceranno a farsi più difficili.<NewLine/>
+                <Italic>
+                    Mia cara Giulia, se sei arrivata fin qui vuol dire che la forza d'animo e lo spirito natalizio non ti mancano.
+                    Perché tu sia veramente degna di ricevere i tuoi regali, devi prima dimostrare di aver raggiunto una maturità
+                    tale per cui tu possa abbracciare il Natale con pienezza per poterlo poi condividere con le persone che ti
+                    circondano.<NewLine/>
+                    Ecco quindi che per raggiungere questa maturità riceverai la visita di tre Spiriti, lo Spirito del Natale Passato,
+                    lo Spirito del Natale Presente e lo Spirito del Natale Futuro. Ho detto "riceverai" ma è chiaro che gli Spiriti
+                    non si spostano solo per venire a casa tua come quelli della Bofrost, nossignori! Sarai tu a doverli cercare,
+                    a doverli invocare, e ad ascoltare il loro importante messaggio.<NewLine/>
+                    Per primo incontrerai lo Spirito del Natale Passato; per incontrarlo è necessario recarsi nei luoghi dove regna 
+                    il passato e l'antichità. Ora parti e <Bold>vai dove inizia l'arduo percorso che porta alla casa del 
+                    Padre della nostra volgar lingua</Bold>.
+                </Italic>
             </Text>,
         location: GPS_PIAZZA_MAGGIORE,
         gpsHint: "via-degli-dei",
         endHint: "piazza-maggiore"
+    },
+    {
+        tag: InputComponent,
+        title: "Lo Spirito del Natale Passato",
+        image: require('../assets/antico-albergo-sant-antonio.jpg'),
+        text: <Text>
+            Ecco che come promesso compare in mezzo alla folla lo Spirito Natale Passato. Ovviamente solo tu puoi vedere lo Spirito,
+            mentre le altre persone nella piazza continuano le loro faccende in maniera spensierata.<NewLine/>
+        </Text>,
+        children: [
+            <ListenButton key={0}
+                buttonText="ASCOLTA LO SPIRITO"
+                speech={"Cara Giulia, spero di trovarti bene e in salute. Mi chiamo Cristiano Vettori e sono il caro ragazzo che gestisce " + 
+                        "l'Antico Albergo Sant'Antonio di Fonzaso. Qui a Fonzaso la vita prosegue tranquilla tra un piatto squisito " +
+                        "e l'altro. La mia mamma sta bene e continua a sfornare patate al forno come non mai, mentre io mi diverto da matti " + 
+                        "con il fantacalcio. Ancora sento la ferita al cuore di quando tu hai rinunciato ad avere il dolce, nonostante il tuo " + 
+                        "fidanzato lo desiderasse con insistenza. Vengo qui per parlarti dei Natali passati, in particolare del Natale 2016. " + 
+                        "In quel periodo eri triste e sola, nonostante tu spenda sempre tutte le forze per irradiare il mondo con il tuo sorriso. " + 
+                        "Quel Natale, come tante altre volte, decidesti di andare a trovare Riccardo nella speranza che ti fumasse. Speravi di " + 
+                        "fare breccia nel suo cuore con la tua dolcezza e la tua simpatia. Le cose non andarono proprio come speravi, e tornasti " + 
+                        "a casa a mani vuote. Ma come ben sappiamo il destino ha voluto premiarti poco tempo dopo. " + 
+                        "Adesso ti devo salutare, perché per la prima volta da quando ve ne siete andati sono arrivati dei nuovi clienti. " + 
+                        "Spero che da questo breve ricordo tu possa capire che per quanto la vita possa sembrare infelice, se le cose si vogliono " + 
+                        "ardentemente alla fine si avverano. Bisogna mantenere il fuoco della speranza vivo nei momenti più bui. " + 
+                        "Ora prosegui la tua ricerca e trova lo Spirito del Natale Presente. Addio, e che la vita possa sempre sorriderti."}>
+            </ListenButton>,
+            <Italic key={1}>Va dove la ricotta stregata è mangiata, girati, e trova il numero lasciato dal nostro Poeta</Italic>
+        ],
+        buttonText: "INSERISCI",
+        answer: "XXXI",
+        endHint: "garisenda"
     },
     {
         tag: SimpleCard,
