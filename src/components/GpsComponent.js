@@ -1,7 +1,8 @@
 import React from 'react';
+import { View } from 'react-native'
 import TaskComponent from './TaskComponent';
 import SimpleCard from './SimpleCard';
-import { Paragraph, Text } from 'react-native-paper'
+import { Paragraph, Text, Button } from 'react-native-paper'
 const { Location } = Expo
 import { distanceBetweenGpsCoordinates } from '../utils'
 
@@ -16,44 +17,54 @@ export default class GpsComponent extends TaskComponent {
         this.state = {showGpsError: false, location: null}
     }
 
-    async getLocationAsync()
+    async enableWatchPosition()
     {
-        return Location.getCurrentPositionAsync({enableHighAccuracy: true})
+        try
+        {
+            if (this.gpsSubscription)
+                this.gpsSubscription.remove()
+
+            this.gpsSubscription = await Location.watchPositionAsync({
+                enableHighAccuracy: true,
+                timeInterval: 1000,
+                distanceInterval: 1
+            }, this.onNewLocation.bind(this))
+
+            return true
+        }
+        catch(err){ return false }
     }
 
-    componentDidMount()
+    async componentDidMount()
     {
-        this.gpsInterval = setInterval(async () => {
+        let watchLocationEnable = await this.enableWatchPosition()
+        if (!watchLocationEnable)
+            this.setState({ showGpsError: true })
+    }
 
-            let location = null
-            try
-            {
-                location = await this.getLocationAsync()
-            }
-            catch (err) { console.log(err) }
-
-            if (location && location.coords.accuracy < 100)
-            {
-                let distance = distanceBetweenGpsCoordinates(location.coords, this.targetLocation)
-                let distanceThreshold = this.props.thresh ? this.props.thresh : DEFAULT_DISTANCE_THRESHOLD
-                distanceThreshold /= 1000.0
-                
-                if (distance < distanceThreshold)
-                    this.done()
-                else
-                    this.setState({ location: location, distance: distance, showGpsError: false })
-            }
+    onNewLocation(location)
+    {
+        if (location && location.coords.accuracy < 100)
+        {
+            let distance = distanceBetweenGpsCoordinates(location.coords, this.targetLocation)
+            let distanceThreshold = this.props.thresh ? this.props.thresh : DEFAULT_DISTANCE_THRESHOLD
+            distanceThreshold /= 1000.0
+            
+            if (distance < distanceThreshold)
+                this.done()
             else
-            {
-                this.setState({ showGpsError: true })
-            }
-
-        }, 5000)
+                this.setState({ location: location, distance: distance, showGpsError: false })
+        }
+        else
+        {
+            this.setState({ showGpsError: true })
+        }
     }
 
     componentWillUnmount()
     {
-        clearInterval(this.gpsInterval)
+        if (this.gpsSubscription)
+            this.gpsSubscription.remove()
     }
 
     renderDistance()
@@ -73,9 +84,12 @@ export default class GpsComponent extends TaskComponent {
     {
         if (this.state.showGpsError)
             return (
+                <View>
                 <Text style={{color: 'red'}}>
                     Couldn't update the location. Maybe you turned your GPS off?
                 </Text>
+                <Button onPress={this.enableWatchPosition.bind(this)}>Press me when GPS is on</Button>
+                </View>
             )
     }
 
