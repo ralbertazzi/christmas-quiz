@@ -118,7 +118,7 @@ export default class App extends React.Component {
         let component = this.components[this.state.currentComponent]
         let ComponentTag = component.tag
 
-        console.log(component)
+        //console.log(component)
 
         return (
             <View style={styles.container}>
