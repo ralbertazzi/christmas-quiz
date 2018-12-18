@@ -16,18 +16,18 @@ export default class HintDialog extends React.Component {
                 <Dialog
                     visible={this.props.visible}
                     onDismiss={this.props.onCancel}>
-                <Dialog.Title>Insert hint code</Dialog.Title>
+                <Dialog.Title>Inserisci codice di aiuto</Dialog.Title>
                 <Dialog.Content>
-                    <Paragraph>Requested for help? Write the hint code that you received and go on :)</Paragraph>
+                    <Paragraph>Hai bisogno di un aiuto? 🤷 Scrivi qui il codice che hai ricevuto 📩</Paragraph>
                     <TextInput
                         mode='outlined'
-                        label='Hint code'
+                        label='Codice'
                         value={this.state.text}
                         onChangeText={text => this.setState({ text })} />
                 </Dialog.Content>
                 <Dialog.Actions>
-                    <Button onPress={this.props.onCancel}>Cancel</Button>
-                    <Button onPress={() => this.props.onConfirm(this.state.text)}>Insert</Button>
+                    <Button onPress={this.props.onCancel}>Annulla</Button>
+                    <Button onPress={() => this.props.onConfirm(this.state.text)}>Inserisci</Button>
                 </Dialog.Actions>
                 </Dialog>
             </Portal>

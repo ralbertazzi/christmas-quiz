@@ -5,9 +5,8 @@ const { Speech } = Expo
 const ListenButton = (props) => (
     <Button
         style={{ margin: 10 }}
-        icon='speaker'
         onPress={() => Speech.speak(props.speech, { language: 'it' })}>
-        {props.buttonText}
+        {'🔉 ' + props.buttonText}
     </Button>
 )
 
