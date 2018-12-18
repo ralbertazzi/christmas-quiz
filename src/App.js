@@ -129,11 +129,13 @@ export default class App extends React.Component {
                     { __DEV__ && <Appbar.Action icon="delete-forever" onPress={() => this.clearState()} /> }
                     { component.endHint || component.gpsHint ? <Appbar.Action icon="redeem" onPress={this.triggerHintDialog} /> : null }
                 </Appbar.Header>
+
+                <SantaTracker style={styles.card} progress={ (this.state.currentComponent + 1) / this.components.length }/>
                 
                 <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
                     <ScrollView ref={(c) => {this.scroll = c}}>
 
-                        <SantaTracker style={styles.card} progress={ (this.state.currentComponent + 1) / this.components.length }/>
+                        
                         <ComponentTag {...component} style={styles.card} onDone={this.nextComponent}/>
 
                     </ScrollView>

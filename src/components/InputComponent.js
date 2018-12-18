@@ -8,7 +8,7 @@ export default class InputComponent extends TaskComponent {
     constructor(props)
     {
         super(props)
-        this.errorMessage = this.props.errorMessage ? this.props.errorMessage : 'Answer not valid'
+        this.errorMessage = this.props.errorMessage ? this.props.errorMessage : 'Risposta errata'
         this.state = {errorMessage : '', answer: ''}
     }
 
@@ -36,7 +36,7 @@ export default class InputComponent extends TaskComponent {
             <TextInput
                 style={{ margin: 10 }}
                 label={this.state.errorMessage}
-                placeholder='Answer'
+                placeholder='Risposta'
                 error={this.state.errorMessage}
                 onChangeText={this.onChangeText.bind(this)}
                 value={this.state.answer}

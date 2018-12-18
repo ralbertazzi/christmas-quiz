@@ -193,7 +193,7 @@ levels = [
         endHint: "piazza-maggiore"
     },
     {
-        tag: InputComponent,
+        tag: SimpleCard,
         title: "Lo Spirito del Natale Passato",
         image: require('../assets/antico-albergo-sant-antonio.jpg'),
         text: <Text>
@@ -216,10 +216,27 @@ levels = [
                         "Spero che da questo breve ricordo tu possa capire che per quanto la vita possa sembrare infelice, se le cose si vogliono " + 
                         "ardentemente alla fine si avverano. Bisogna mantenere il fuoco della speranza vivo nei momenti più bui. " + 
                         "Ora prosegui la tua ricerca e trova lo Spirito del Natale Presente. Addio, e che la vita possa sempre sorriderti."}>
-            </ListenButton>,
-            <Italic key={1}>Va dove la ricotta stregata è mangiata, girati, e trova il numero lasciato dal nostro Poeta</Italic>
+            </ListenButton>
         ],
-        buttonText: "INSERISCI",
+        buttonText: "CONTINUA",
+    },
+    {
+        tag: InputComponent,
+        title: "De gustibus",
+        image: require('../assets/canabis.png'),
+        text: <Text>
+                Nel momento in cui il gaio spirito scompare, si materializza al suo posto una piccola cartolina con una (sicuramente antica) mappa.
+                Sul retro della cartolina: <NewLine/> 
+                <Italic>Rivolgi il tuo sguardo verso l'alto e cerca la parola mancante:<NewLine/>
+                    <Bold>Panis vita, _____ protectio, vinum laetitia</Bold>
+                </Italic>
+            </Text>,
+        answer: "canabis",
+        endHint: "rizzoli",
+        buttonText: "INSERISCI"
+    },
+    {
+        text: <Italic key={1}>Va dove la ricotta stregata è mangiata, girati, e trova il numero lasciato dal nostro Poeta</Italic>,
         answer: "XXXI",
         endHint: "garisenda"
     },
