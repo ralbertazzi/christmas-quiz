@@ -222,7 +222,7 @@ levels = [
     },
     {
         tag: InputComponent,
-        title: "De gustibus",
+        title: "De gustibus...",
         image: require('../assets/canabis.png'),
         text: <Text>
                 Nel momento in cui il gaio spirito scompare, si materializza al suo posto una piccola cartolina con una (sicuramente antica) mappa.
@@ -236,9 +236,44 @@ levels = [
         buttonText: "INSERISCI"
     },
     {
-        text: <Italic key={1}>Va dove la ricotta stregata è mangiata, girati, e trova il numero lasciato dal nostro Poeta</Italic>,
+        tag: InputComponent,
+        title: "... non disputandum est!",
+        image: require('../assets/gelati.jpg'),
+        text: <Text>
+                Indizio trovato, ma ora? Sembra di brancolare nel buio quando un tabaccaio, vedendoti girare a vanvera avanti e indietro,
+                si avvicina e ti lascia un messaggio scritto su carta, dicendo che era stato lasciato poco fa da un insolito tizio:<NewLine/>
+                <Italic>Va dove la ricotta stregata è mangiata, girati, e trova il numero del canto del nostro Poeta</Italic>
+            </Text>,
         answer: "XXXI",
-        endHint: "garisenda"
+        endHint: "garisenda",
+        buttonText: "INSERISCI"
+    },
+    {
+        tag: SimpleCard,
+        title: "Lo Spirito del Natale Presente",
+        image: require('../assets/boris.jpg'),
+        text: <Text>
+            Una volta inserito il codice ecco comparire davanti a te lo Spirito Natale Presente 😮.
+            Più che comparire, arriva sfrecciando in mezzo alla folla con il suo possente mezzo.
+        </Text>,
+        children: [
+            <ListenButton key={0}
+                buttonText="ASCOLTA LO SPIRITO"
+                speech={"Ciao Giulia, io essere sobrio autista di Romania. Forse mi chiamo Igor ma gente preferisce chimarmi Furia." + 
+                        "Sono partito da Bucarest 2 ore fa con mio pulmino e sono arrivato ora. Tra mezz'ora devo essere di nuovo " + 
+                        "a Castello di Bran per ritirare turisti quindi sarò breve. Presente in questo momento è molto bello, perchè " + 
+                        "tu avere tuo fidanzato bello e bravo con te. Nonostante il futuro possa sembrare incerto, tu preoccupati di " + 
+                        "presente e di vivere con pienezza ogni attimo di tua vita. E vedrai che futuro farà meno paura. " + 
+                        "Tuo ragazzo mi sembra persona molto corretta e molto buona. Mi ricordo quando da ritorno di giro di Romania " + 
+                        "ha tenuto tua testa con la sua mano mentre dormivi per due ore di fila. Lui si preoccupa di te anche se ogni tanto " + 
+                        "sembra burbero e ignorante, un po' come noi rumeni. Divertiti con lui e rendi focoso vostro letto come una " + 
+                        "vera babushka. Adesso devo proprio andare, perché forze armate italiane stanno per trovarmi. " + 
+                        "Completa tuo cammino spirituale trovando Spirito di Natale Futuro. Credo che questa mappa possa aiutarti. " + 
+                        "Ho provato a risolvere indovinello mentre guidavo contromano per passare tempo, ma non sono riuscito a trovare " + 
+                        "soluzione. Spero tu essere più intelligente di me. Addio!"}>
+            </ListenButton>
+        ],
+        buttonText: "CONTINUA",
     },
     {
         tag: SimpleCard,
