@@ -23,7 +23,12 @@
       "**/*"
     ],
     "android": {
-      "package": "it.ralbertazzi.christmasquiz"
+      "package": "it.ralbertazzi.christmasquiz",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyA19E7D2g9ZCN6EgwQ7YNS0tU3ErwxyLsY"
+        }
+      }
     },
     "ios": {
       "supportsTablet": true
