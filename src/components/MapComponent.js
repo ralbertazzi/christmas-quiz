@@ -1,4 +1,6 @@
 import React from 'react';
+import { View, StyleSheet } from 'react-native'
+import { Button } from 'react-native-paper'
 const { MapView } = Expo
 
 
@@ -65,6 +67,14 @@ const PORTE = [
     }
 ]
 
+const BOLOGNA_REGION = {
+    latitude: 44.49541659162844,
+    latitudeDelta: 0.027930152845833334,
+    longitude: 11.342401932924986,
+    longitudeDelta: 0.040199942886829376
+}
+
+
 
 export default class MapComponent extends React.Component {
 
@@ -72,9 +82,13 @@ export default class MapComponent extends React.Component {
     {
         super(props)
         this.state = {
+            isMapReady: false,
             selectedMarkerIdx: -1,
             lines: []
         }
+
+        this.onMapReady = this.onMapReady.bind(this)
+        this.setInitialRegion = this.setInitialRegion.bind(this)
     }
 
     markerBelongsToALine(marker_idx)
@@ -122,39 +136,60 @@ export default class MapComponent extends React.Component {
     }
 
 
+    onMapReady() {
+        this.setState({ isMapReady: true })
+    }
+
+    setInitialRegion() {
+        this.map.animateToRegion(BOLOGNA_REGION, 1000)
+    }
+
+
     render()
     {
         //console.log('Selected marker idx is', this.state.selectedMarkerIdx)
         //console.log('Lines:', this.state.lines)
         return (
-            <MapView 
-                style={{ flex: 1 }}
-                loadingEnabled = {true}
-                moveOnMarkerPress = {false}
-                initialRegion={{
-                    latitude: 44.507502,
-                    longitude: 11.320972,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421
-                }}>
-            {
-                PORTE.map((loc, i) => (
-                    <MapView.Marker
-                        key={`${i}${this.getMarkerColor(i)}`}
-                        coordinate={loc}
-                        title={loc.name}
-                        pinColor={this.getMarkerColor(i)}
-                        onPress={() => this.onMarkerClick(i)}/>
-                ))
-            }
-            {
-                this.state.lines.map((line, i) => (
-                    <MapView.Polyline 
-                        key={`${i}${Date.now()}`}
-                        coordinates={ [PORTE[line[0]], PORTE[line[1]]] }/>
-                ))
-            }
-            </MapView>
+            <View>
+                <MapView 
+                    style={styles.map}
+                    ref={ref => { this.map = ref }}
+                    loadingEnabled={true}
+                    moveOnMarkerPress={false}
+                    showsTraffic={false}
+                    showsIndoors={false}
+                    onMapReady={this.onMapReady}
+                    initialRegion={BOLOGNA_REGION}>
+                {
+                    this.state.isMapReady &&
+
+                    PORTE.map((loc, i) => (
+                        <MapView.Marker
+                            key={`${i}${this.getMarkerColor(i)}`}
+                            coordinate={loc}
+                            title={loc.name}
+                            pinColor={this.getMarkerColor(i)}
+                            onPress={() => this.onMarkerClick(i)}/>
+                    ))
+                }
+                {
+                    this.state.isMapReady &&
+
+                    this.state.lines.map((line, i) => (
+                        <MapView.Polyline 
+                            key={`${i}${Date.now()}`}
+                            coordinates={ [PORTE[line[0]], PORTE[line[1]]] }/>
+                    ))
+                }
+                </MapView>
+                <Button onPress={this.setInitialRegion}>Torna alla vista di partenza</Button>
+            </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    map: {
+        height: 300
+    }
+})

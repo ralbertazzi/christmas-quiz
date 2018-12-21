@@ -97,6 +97,7 @@ export default class GpsComponent extends TaskComponent {
     {
         return (
         <SimpleCard {...this.props}>
+            { this.props.children }
             { __DEV__ && <Paragraph>{JSON.stringify(this.state.location)}</Paragraph>}
             {this.renderDistance()}
             {this.renderGpsErrorMessage()}

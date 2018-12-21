@@ -6,6 +6,7 @@ import InputComponent from './components/InputComponent'
 import FakeMode from './components/FakeMode'
 import ListenButton from './components/ListenButton'
 import { Text } from 'react-native-paper'
+import MapComponent from './components/MapComponent';
 
 let GPS_MARCONI = { latitude: 44.431174, longitude: 11.269839 }
 let GPS_ALTOPIANO = { latitude: 44.436754, longitude: 11.264497 }
@@ -274,6 +275,18 @@ levels = [
             </ListenButton>
         ],
         buttonText: "CONTINUA",
+    },
+    {
+        tag: GpsComponent,
+        image: require("../assets/inferno-dante.jpg"),
+        title: "Porte di Bologna",
+        text: <Text>Sample Text</Text>,
+        location: GPS_PIAZZA_MAGGIORE,
+        children: [
+            <MapComponent key={0} />
+        ],
+        gpsHint: "porte-bologna",
+        endHint: "the-end"
     },
     {
         tag: SimpleCard,

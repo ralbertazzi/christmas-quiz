@@ -131,11 +131,10 @@ export default class App extends React.Component {
                 </Appbar.Header>
 
                 <SantaTracker style={styles.card} progress={ (this.state.currentComponent + 1) / this.components.length }/>
-                
+
                 <KeyboardAvoidingView style={{flex: 1}} behavior="padding">
                     <ScrollView ref={(c) => {this.scroll = c}}>
 
-                        
                         <ComponentTag {...component} style={styles.card} onDone={this.nextComponent}/>
 
                     </ScrollView>
@@ -145,8 +144,8 @@ export default class App extends React.Component {
                         onCancel= { this.triggerHintDialog }
                         visible = { this.state.displayHintDialog }
                     />
-
                 </KeyboardAvoidingView>
+                
                 <Snackbar
                     visible={this.state.displaySnackbar}
                     onDismiss={this.hideMessage}
