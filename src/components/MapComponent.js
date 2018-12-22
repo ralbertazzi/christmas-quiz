@@ -81,60 +81,42 @@ export default class MapComponent extends React.Component {
     constructor(props)
     {
         super(props)
+        this.solution = [3, 10, 6, 8, 0, 2, 11, 1, 9, 7, 5, 4]
         this.state = {
             isMapReady: false,
-            selectedMarkerIdx: -1,
-            lines: []
+            currentIdx: -1,
+            clickedIdx: -1
         }
 
         this.onMapReady = this.onMapReady.bind(this)
         this.setInitialRegion = this.setInitialRegion.bind(this)
     }
 
-    markerBelongsToALine(marker_idx)
-    {
-        for (let line of this.state.lines)
-            if (line[0] == marker_idx || line[1] == marker_idx)
-                return true
-
-        return false
-    }
-
     onMarkerClick(i)
     {
-        // If two lines are already drawn and you select a marker that does not belong to one of the two lines, stop
-        if (this.state.lines.length == 2 && !this.markerBelongsToALine(i))
-            return
+        if (this.state.clickedIdx < 0 && this.solution.indexOf(i) > this.state.currentIdx)
+        {
+            this.setState({ clickedIdx: i })
+            setTimeout(() => {
+                if (this.solution[this.state.currentIdx + 1] == i)
+                    this.setState({ currentIdx: this.state.currentIdx + 1 })
+                else if (this.solution.indexOf(i) > this.state.currentIdx && this.state.currentIdx >= 0)
+                    this.setState({ currentIdx: -1})
 
-        if (this.state.selectedMarkerIdx >= 0)
-        {
-            if (this.state.selectedMarkerIdx != i)
-            {
-                let filteredLines = this.state.lines.filter(line => line[0] != i && line[1] != i)
-                this.setState({ lines: [...filteredLines, [this.state.selectedMarkerIdx, i]]})
-            }
-                
-            this.setState({ selectedMarkerIdx: -1 })
-        }
-        else
-        {
-            this.setState({ 
-                selectedMarkerIdx: i,
-                lines: this.state.lines.filter(line => line[0] != i && line[1] != i)
-            })
+                this.setState({ clickedIdx: -1})
+            }, 1000)
         }
     }
 
     getMarkerColor(i)
     {
-        if (this.state.selectedMarkerIdx == i)
+        if (this.state.clickedIdx == i)
             return 'yellow'
-        else if (this.markerBelongsToALine(i))
-            return 'green'
-        else
+        else if(this.solution.indexOf(i) > this.state.currentIdx)
             return 'red'
+        else
+            return 'green'
     }
-
 
     onMapReady() {
         this.setState({ isMapReady: true })
@@ -142,6 +124,25 @@ export default class MapComponent extends React.Component {
 
     setInitialRegion() {
         this.map.animateToRegion(BOLOGNA_REGION, 1000)
+    }
+
+    // Sant'Isaia, San Vitale
+    // Lame, San Mamolo
+    drawSolutionLines()
+    {
+        let coords = []
+        if (this.state.currentIdx == 11)
+            coords.push([4, 10])
+        if (this.state.currentIdx >= 5)
+            coords.push([2, 6])
+
+        let lines = []
+        for(let i = 0; i < coords.length; i++)
+            lines.push(<MapView.Polyline 
+                key={`${i}${Date.now()}`}
+                coordinates={ [PORTE[coords[i][0]], PORTE[coords[i][1]]] }/>)
+
+        return lines
     }
 
 
@@ -173,13 +174,7 @@ export default class MapComponent extends React.Component {
                     ))
                 }
                 {
-                    this.state.isMapReady &&
-
-                    this.state.lines.map((line, i) => (
-                        <MapView.Polyline 
-                            key={`${i}${Date.now()}`}
-                            coordinates={ [PORTE[line[0]], PORTE[line[1]]] }/>
-                    ))
+                    this.drawSolutionLines()
                 }
                 </MapView>
                 <Button onPress={this.setInitialRegion}>Torna alla vista di partenza</Button>

@@ -13,8 +13,8 @@ let GPS_ALTOPIANO = { latitude: 44.436754, longitude: 11.264497 }
 let GPS_SCEICCO_BIANCO = { latitude: 44.484043, longitude: 11.269085 }
 let GPS_PARCHETTO = { latitude: 44.482089, longitude: 11.264395 }
 let GPS_PIAZZA_MAGGIORE = { latitude: 44.493732, longitude: 11.343135 }
-let GPS_PIAZZA_NETTUNO = { latitude: 44.494280, longitude: 11.342671 }
-let GPS_CASA_LUCA = { latitude: 44.468682, longitude: 11.373693 }
+let GPS_SAN_FRANCESCO = { latitude: 44.494480, longitude: 11.336389 }
+let GPS_CASA_GIULIA = { latitude: 44.422362, longitude: 11.260372 }
 
 
 const Bold = (props) => (
@@ -264,7 +264,8 @@ levels = [
                         "Sono partito da Bucarest 2 ore fa con mio pulmino e sono arrivato ora. Tra mezz'ora devo essere di nuovo " + 
                         "a Castello di Bran per ritirare turisti quindi sarò breve. Presente in questo momento è molto bello, perchè " + 
                         "tu avere tuo fidanzato bello e bravo con te. Nonostante il futuro possa sembrare incerto, tu preoccupati di " + 
-                        "presente e di vivere con pienezza ogni attimo di tua vita. E vedrai che futuro farà meno paura. " + 
+                        "presente e di vivere con pienezza ogni attimo di tua vita. E vedrai che futuro farà meno paura. " +
+                        "Anche io vivo in presente e ad ogni curva io essere pronto ad abbandonare vita con serenità. " +
                         "Tuo ragazzo mi sembra persona molto corretta e molto buona. Mi ricordo quando da ritorno di giro di Romania " + 
                         "ha tenuto tua testa con la sua mano mentre dormivi per due ore di fila. Lui si preoccupa di te anche se ogni tanto " + 
                         "sembra burbero e ignorante, un po' come noi rumeni. Divertiti con lui e rendi focoso vostro letto come una " + 
@@ -278,20 +279,68 @@ levels = [
     },
     {
         tag: GpsComponent,
-        image: require("../assets/inferno-dante.jpg"),
+        image: require("../assets/mappa-bologna.jpg"),
         title: "Porte di Bologna",
-        text: <Text>Sample Text</Text>,
-        location: GPS_PIAZZA_MAGGIORE,
+        text: <Text>
+            Una volta terminato il sermone, il simpatico autista riparte con il suo pulmino fatato e sparisce dietro la curva.
+            La mappa che ti ha lasciato sembra ad occhio intrigante e complicata, oltre ad essere interattiva. 
+            L'intestazione di questa mappa recita come segue:<NewLine/>
+            <Italic>
+                Per trovare lo Spirito del Natale Futuro dovrai portare il tuo corpo intriso di spirito natalizio in una
+                nuova posizione segreta. Le Porte ti sapranno indicare la via.
+            </Italic> 
+        </Text>,
+        location: GPS_SAN_FRANCESCO,
         children: [
             <MapComponent key={0} />
         ],
         gpsHint: "porte-bologna",
-        endHint: "the-end"
+        endHint: "piazza-malpighi"
     },
     {
         tag: SimpleCard,
+        image: require("../assets/ego.png"),
+        title: "Lo Spirito del Natale Futuro",
+        text: <Text>
+            Appare infine lo Spirito del Natale Futuro davanti ai tuoi occhi (notare il colore bluastro tipico
+            delle apparizioni paranormali)! Sembra che in realtà lo Spirito non sia uno solo ma ce ne siano ben
+            due! Proviamo ad ascoltare le loro parole:
+        </Text>,
+        children: [
+            <ListenButton key={0}
+                buttonText="ASCOLTA LO SPIRITO"
+                speech={"Ciao Giulia, come stai? Io e Valentino stiamo componendo un nuovo singolo a tema " + 
+                        "natalizio che farà faville in tutto il mondo! Con il mio grande talento alla chiatarra " + 
+                        "e soprattutto con le grandi capacità ritmiche di Valentino a Natale 2019 tutti " + 
+                        "ascolteranno i nostri brani. Valentino smettila di tamburellare le pentole, che sto parlando! " + 
+                        "Comunque, volevo dirti che se continuerai su questa strada, affianco al tuo fidanzato " + 
+                        "bello, buono e simpatico, avrete senza dubbio un futuro meraviglioso insieme. " + 
+                        "Lui si immagina grandi cose con te e sa che la vostra vita insieme sarà splendida."}>
+            </ListenButton>
+        ],
+        buttonText: "CONTINUA"
+    },
+    {
+        tag: GpsComponent,
+        image: require('../assets/albero-di-natale.jpg'),
+        title: "Torna a casa Lessie",
+        location: GPS_CASA_GIULIA,
+        text: <Text>
+            Come ordinato dagli Spiriti del Natale Futuro, è ora di tornare a casa!
+        </Text>,
+        gpsHint: 'casa-san-michele',
+        endHint: 'the-end'
+    },
+    {
+        tag: SimpleCard,
+        image: require('../assets/christmas-poem.jpg'),
         title: "The End",
-        text: "Complimenti!",
+        text: <Text>
+                Sembra che Babbo Natale avesse lasciato fin dall'inizio i suoi doni al tuo caro e bel fidanzato!
+                Perché non gli dai un bacio e li chiedi a lui?<NewLine/>
+                Complimenti per aver superato tutte le prove! Che il Natale possa portare tanta felicità e
+                serenità a te e ai tuoi cari. Buone Feste e... arrivederci!
+            </Text>
     }
 ]
 
