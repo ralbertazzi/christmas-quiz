@@ -195,39 +195,40 @@ levels = [
     },
     {
         tag: SimpleCard,
-        title: "Lo Spirito del Natale Passato",
-        image: require('../assets/antico-albergo-sant-antonio.jpg'),
+        image: require("../assets/ego.png"),
+        title: "Lo Spirito del Natale Passato 👨‍❤️‍👨",
         text: <Text>
-            Ecco che come promesso compare in mezzo alla folla lo Spirito Natale Passato 😮. Ovviamente solo tu puoi vedere lo Spirito 🙈,
+            Ecco che come promesso compare in mezzo alla folla lo Spirito Natale Passato (notare il colore bluastro tipico
+            delle apparizioni paranormali)! 😮. Ovviamente solo tu puoi vedere lo Spirito 🙈,
             mentre le altre persone nella piazza continuano le loro faccende in maniera spensierata.<NewLine/>
+            Sembra che in realtà lo Spirito non sia uno solo ma ce ne siano ben due! Proviamo ad ascoltare le loro parole:
         </Text>,
         children: [
             <ListenButton key={0}
                 buttonText="ASCOLTA LO SPIRITO"
-                speech={"Cara Giulia, spero di trovarti bene e in salute. Mi chiamo Cristiano Vettori e sono il caro ragazzo che gestisce " + 
-                        "l'Antico Albergo Sant'Antonio di Fonzaso. Qui a Fonzaso la vita prosegue tranquilla tra un piatto squisito " +
-                        "e l'altro. La mia mamma sta bene e continua a sfornare patate al forno come non mai, mentre io mi diverto da matti " + 
-                        "con il fantacalcio. Ancora sento la ferita al cuore di quando tu hai rinunciato ad avere il dolce, nonostante il tuo " + 
-                        "fidanzato lo desiderasse con insistenza. Vengo qui per parlarti dei Natali passati, in particolare del Natale 2016. " + 
+                speech={"Ciao Giulia, come stai? Io e Valentino stiamo componendo un nuovo singolo a tema " + 
+                        "natalizio che farà faville in tutto il mondo! Con il mio grande talento alla chitarra " + 
+                        "e soprattutto con le grandi capacità ritmiche di Valentino a Natale 2019 tutti " + 
+                        "ascolteranno i nostri brani. Valentino smettila di tamburellare le pentole, che sto parlando! " + 
+                        "Comunque, volevo dirti che siamo venuti qui per parlarti dei Natali passati, in particolare del Natale 2016. " + 
                         "In quel periodo eri triste e sola, nonostante tu spenda sempre tutte le forze per irradiare il mondo con il tuo sorriso. " + 
                         "Quel Natale, come tante altre volte, decidesti di andare a trovare Riccardo nella speranza che ti fumasse. Speravi di " + 
                         "fare breccia nel suo cuore con la tua dolcezza e la tua simpatia. Le cose non andarono proprio come speravi, e tornasti " + 
                         "a casa a mani vuote. Ma come ben sappiamo il destino ha voluto premiarti poco tempo dopo. " + 
-                        "Adesso ti devo salutare, perché per la prima volta da quando ve ne siete andati sono arrivati dei nuovi clienti. " + 
                         "Spero che da questo breve ricordo tu possa capire che per quanto la vita possa sembrare infelice, se le cose si vogliono " + 
-                        "ardentemente alla fine si avverano. Bisogna mantenere il fuoco della speranza vivo nei momenti più bui. " + 
-                        "Ora prosegui la tua ricerca e trova lo Spirito del Natale Presente. Addio, e che la vita possa sempre sorriderti."}>
+                        "ardentemente alla fine si avverano. Bisogna mantenere il fuoco della speranza vivo nei momenti più bui. " +
+                        "Adesso dobbiamo andare, perché il talento musicale non si coltiva da solo. Vienici a trovare una di queste volte. A presto!" }>
             </ListenButton>
         ],
-        buttonText: "CONTINUA",
+        buttonText: "CONTINUA 🎤"
     },
     {
         tag: InputComponent,
         title: "De gustibus...",
         image: require('../assets/canabis.png'),
         text: <Text>
-                Nel momento in cui il gaio spirito scompare, si materializza al suo posto una piccola cartolina con una (sicuramente antica) mappa.
-                Sul retro della cartolina: <NewLine/> 
+                Nel momento in cui gli spiriti scompaiono, si materializza al loro posto una piccola cartolina ✉️
+                con una (sicuramente antica) mappa. Sul retro della cartolina: <NewLine/> 
                 <Italic>Rivolgi il tuo sguardo verso l'alto e cerca la parola mancante:<NewLine/>
                     <Bold>Panis vita, _____ protectio, vinum laetitia</Bold>
                 </Italic>
@@ -242,8 +243,8 @@ levels = [
         image: require('../assets/gelati.jpg'),
         text: <Text>
                 Indizio trovato, ma ora? Sembra di brancolare nel buio quando un tabaccaio, vedendoti girare a vanvera avanti e indietro,
-                si avvicina e ti lascia un messaggio scritto su carta, dicendo che era stato lasciato poco fa da un insolito tizio:<NewLine/>
-                <Italic>Va dove la ricotta stregata è mangiata, girati, e trova il numero del canto del nostro Poeta</Italic>
+                si avvicina e ti lascia un messaggio scritto su carta, dicendo che era stato lasciato poco fa da un insolito tizio 🕴:<NewLine/>
+                <Italic>Va dove la ricotta stregata è mangiata 🍦, girati, e trova il numero del canto del nostro Poeta</Italic>
             </Text>,
         answer: "XXXI",
         endHint: "garisenda",
@@ -251,19 +252,19 @@ levels = [
     },
     {
         tag: SimpleCard,
-        title: "Lo Spirito del Natale Presente",
+        title: "Lo Spirito del Natale Presente 👨🏼‍✈️",
         image: require('../assets/boris.jpg'),
         text: <Text>
             Una volta inserito il codice ecco comparire davanti a te lo Spirito Natale Presente 😮.
-            Più che comparire, arriva sfrecciando in mezzo alla folla con il suo possente mezzo.
+            Più che comparire, arriva sfrecciando in mezzo alla folla con il suo possente mezzo 🚍.
         </Text>,
         children: [
             <ListenButton key={0}
                 buttonText="ASCOLTA LO SPIRITO"
-                speech={"Ciao Giulia, io essere sobrio autista di Romania. Forse mi chiamo Igor ma gente preferisce chimarmi Furia." + 
+                speech={"Ciao Giulia, io essere sobrio autista di Romania. Forse mi chiamo Igor ma gente preferisce chiamarmi Furia." + 
                         "Sono partito da Bucarest 2 ore fa con mio pulmino e sono arrivato ora. Tra mezz'ora devo essere di nuovo " + 
                         "a Castello di Bran per ritirare turisti quindi sarò breve. Presente in questo momento è molto bello, perchè " + 
-                        "tu avere tuo fidanzato bello e bravo con te. Nonostante il futuro possa sembrare incerto, tu preoccupati di " + 
+                        "tu avere tuo fidanzato bello e bravo con te. Nonostante futuro possa sembrare incerto, tu preoccupati di " + 
                         "presente e di vivere con pienezza ogni attimo di tua vita. E vedrai che futuro farà meno paura. " +
                         "Anche io vivo in presente e ad ogni curva io essere pronto ad abbandonare vita con serenità. " +
                         "Tuo ragazzo mi sembra persona molto corretta e molto buona. Mi ricordo quando da ritorno di giro di Romania " + 
@@ -282,8 +283,8 @@ levels = [
         image: require("../assets/mappa-bologna.jpg"),
         title: "Porte di Bologna",
         text: <Text>
-            Una volta terminato il sermone, il simpatico autista riparte con il suo pulmino fatato e sparisce dietro la curva.
-            La mappa che ti ha lasciato sembra ad occhio intrigante e complicata, oltre ad essere interattiva. 
+            Una volta terminato il sermone, il simpatico autista riparte con il suo pulmino fatato e sparisce dietro la curva 🚌.
+            La mappa che ti ha lasciato 📜 sembra ad occhio intrigante e complicata (oltre ad essere interattiva). 
             L'intestazione di questa mappa recita come segue:<NewLine/>
             <Italic>
                 Per trovare lo Spirito del Natale Futuro dovrai portare il tuo corpo intriso di spirito natalizio in una
@@ -299,34 +300,37 @@ levels = [
     },
     {
         tag: SimpleCard,
-        image: require("../assets/ego.png"),
-        title: "Lo Spirito del Natale Futuro",
+        title: "Lo Spirito del Natale Futuro 🏔",
+        image: require('../assets/antico-albergo-sant-antonio.jpg'),
         text: <Text>
-            Appare infine lo Spirito del Natale Futuro davanti ai tuoi occhi (notare il colore bluastro tipico
-            delle apparizioni paranormali)! Sembra che in realtà lo Spirito non sia uno solo ma ce ne siano ben
-            due! Proviamo ad ascoltare le loro parole:
+            Incredibile! Sei riuscita a risolvere questo difficilissimo indovinello e a trovare la posizione segreta 📍!<NewLine/>
+            Ecco infatti che appare il gaio Spirito del Natale Futuro davanti ai te. Con grande reverenza e umiltà si presta a parlarti:
         </Text>,
         children: [
             <ListenButton key={0}
                 buttonText="ASCOLTA LO SPIRITO"
-                speech={"Ciao Giulia, come stai? Io e Valentino stiamo componendo un nuovo singolo a tema " + 
-                        "natalizio che farà faville in tutto il mondo! Con il mio grande talento alla chiatarra " + 
-                        "e soprattutto con le grandi capacità ritmiche di Valentino a Natale 2019 tutti " + 
-                        "ascolteranno i nostri brani. Valentino smettila di tamburellare le pentole, che sto parlando! " + 
-                        "Comunque, volevo dirti che se continuerai su questa strada, affianco al tuo fidanzato " + 
-                        "bello, buono e simpatico, avrete senza dubbio un futuro meraviglioso insieme. " + 
-                        "Lui si immagina grandi cose con te e sa che la vostra vita insieme sarà splendida."}>
+                speech={"Cara Giulia, spero di trovarti bene e in salute. Mi chiamo Cristiano Vettori e sono il caro ragazzo che gestisce " + 
+                        "l'Antico Albergo Sant'Antonio di Fonzaso. Qui a Fonzaso la vita prosegue tranquilla tra un piatto squisito " +
+                        "e l'altro. La mia mamma sta bene e continua a sfornare patate al forno come non mai, mentre io mi diverto da matti " + 
+                        "con il fantacalcio. Ancora sento la ferita al cuore di quando tu hai rinunciato ad avere il dolce, nonostante il tuo " + 
+                        "fidanzato lo desiderasse con insistenza. Ma mettiamo da parte i risentimenti: vengo qui per parlarti dei Natali futuri. " +
+                        "Vedo nei tuoi prossimi Natali una casa calda e felice. Vedo tante patate al forno, tanti tortellini ma nessuna frittata. " + 
+                        "Vedo tante tartarughine gioiose ma nessun gatto nudo. Vedo, abbracciato a te, il tuo bellissimo Riccardo. " +
+                        "Vedo, insomma, la felicità. Ricorda che il tuo Riccardo ti ama tanto e che egli si immagina grandi cose con te. " + 
+                        "Lui sa che la vostra vita insieme sarà splendida." +
+                        "Adesso ti devo salutare, perché per la prima volta da quando ve ne siete andati sono arrivati dei nuovi clienti. " +  
+                        "La tua ricerca è ormai volta al termine, torna a casa e goditi questo giorno beato. Addio, e che la vita possa sempre sorriderti."}>
             </ListenButton>
         ],
-        buttonText: "CONTINUA"
+        buttonText: "CONTINUA",
     },
     {
         tag: GpsComponent,
         image: require('../assets/albero-di-natale.jpg'),
-        title: "Torna a casa Lessie",
+        title: "Torna a casa Lessie 🐶",
         location: GPS_CASA_GIULIA,
         text: <Text>
-            Come ordinato dagli Spiriti del Natale Futuro, è ora di tornare a casa!
+            Come ordinato dallo Spirito del Natale Futuro, è ora di tornare a casa! 🏡
         </Text>,
         gpsHint: 'casa-san-michele',
         endHint: 'the-end'
@@ -336,10 +340,10 @@ levels = [
         image: require('../assets/christmas-poem.jpg'),
         title: "The End",
         text: <Text>
-                Sembra che Babbo Natale avesse lasciato fin dall'inizio i suoi doni al tuo caro e bel fidanzato!
-                Perché non gli dai un bacio e li chiedi a lui?<NewLine/>
-                Complimenti per aver superato tutte le prove! Che il Natale possa portare tanta felicità e
-                serenità a te e ai tuoi cari. Buone Feste e... arrivederci!
+                Sembra che Babbo Natale avesse lasciato fin dall'inizio i suoi doni al tuo caro e bel fidanzato 🙈🙉🙊
+                Perché non gli dai un bacio e li chiedi a lui? 😘 <NewLine/>
+                Per quanto riguarda questo gioco, complimenti per aver superato tutte le prove! 🌟🥇🌟
+                Che il Natale possa portare tanta felicità e serenità a te e ai tuoi cari. Buone Feste e... arrivederci! 🧛🦇
             </Text>
     }
 ]
