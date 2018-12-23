@@ -29,7 +29,8 @@ export default class App extends React.Component {
             currentComponent: 0,
             displayHintDialog: false,
             displaySnackbar: false,
-            snackbarMessage: ''
+            snackbarMessage: '',
+            showBackForwardArrows: false
         }
     }
 
@@ -72,7 +73,13 @@ export default class App extends React.Component {
             if (endMessage)
                 this.showMessage(endMessage)
                 
-            this.setState({currentComponent: this.state.currentComponent + 1}, this.storeState)
+            this.setState({currentComponent: this.state.currentComponent + 1}, () => {
+                if (this.state.currentComponent == this.components.length - 1)
+                    this.setState({ showBackForwardArrows: true }, this.storeState)
+                else
+                    this.storeState()
+            })
+
             this.scrollToTop()
         }
     }
@@ -124,8 +131,12 @@ export default class App extends React.Component {
             <View style={styles.container}>
                 <Appbar.Header>
                     <Appbar.Content title="Christmas Quiz"/>
-                    { __DEV__ && <Appbar.Action icon="rotate-left" onPress={this.previousComponent} /> }
-                    { __DEV__ && <Appbar.Action icon="rotate-right" onPress={this.nextComponent} /> }
+                    { ( __DEV__ || this.state.showBackForwardArrows) 
+                        && this.state.currentComponent > 0 
+                        && <Appbar.Action icon="rotate-left" onPress={this.previousComponent} /> }
+                    { ( __DEV__ || this.state.showBackForwardArrows) 
+                        && this.state.currentComponent < this.components.length - 1 
+                        && <Appbar.Action icon="rotate-right" onPress={this.nextComponent} /> }
                     { __DEV__ && <Appbar.Action icon="delete-forever" onPress={() => this.clearState()} /> }
                     { component.endHint || component.gpsHint ? <Appbar.Action icon="redeem" onPress={this.triggerHintDialog} /> : null }
                 </Appbar.Header>
