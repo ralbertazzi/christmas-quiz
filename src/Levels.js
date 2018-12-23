@@ -343,7 +343,8 @@ levels = [
                 Sembra che Babbo Natale avesse lasciato fin dall'inizio i suoi doni al tuo caro e bel fidanzato 🙈🙉🙊
                 Perché non gli dai un bacio e li chiedi a lui? 😘 <NewLine/>
                 Per quanto riguarda questo gioco, complimenti per aver superato tutte le prove! 🌟🥇🌟
-                Come puoi vedere, sono comparse in alto delle frecce che ti consentiranno di rivedere i vari livelli senza doverli risolvere 🧙‍♂️.<NewLine/>
+                Inoltre, se tutto ha funzionato come doveva, sono comparse in alto delle frecce che ti consentiranno di rivedere i vari 
+                livelli senza doverli risolvere 🧙‍♂️.<NewLine/>
                 Che il Natale possa portare tanta felicità e serenità a te e ai tuoi cari. Buone Feste e... arrivederci! 🧛🦇
             </Text>
     }
